@@ -50,9 +50,9 @@ def heapSort(arr):
     while(i >= 0):
         swap(0, i, arr)
         #print(arr)
-        i = i - 1
-        maxHeapify(i, 0, arr)
         
+        maxHeapify(i, 0, arr)
+        i = i - 1
         #print(arr)
         
         #print(i)
@@ -69,7 +69,8 @@ def extractMaximum(arr, heapSize):
     heapSize = heapSize- 1
     maxHeapify(heapSize, 0, arr)
         
-l = [2,45,63,23,26,6]
+#l = [2,45,63,23,26,6]
+l = [3,44,5,47,15,36,26,27,2,46]
 print("original array: ", l, "\n")
 buildHeap(l)
 
