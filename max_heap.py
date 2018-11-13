@@ -10,7 +10,7 @@ def parent(i, arr):
     parent = math.floor((i-1)/2)
     return int(parent)
 
-def swap(i, j, arr):
+def swap(i,j,arr):
     temp = arr[i]
     arr[i] = arr[j]
     arr[j] = temp
@@ -20,29 +20,21 @@ def maxHeapify(arrSize, i, arr):
 
     leftArrIndex = left(i, arr)
     rightArrIndex = right(i, arr)
+
     #print(leftArrIndex)
     #print(rightArrIndex)
-    if (rightArrIndex == arrSize):
-        if((i<arrSize) and arr[leftArrIndex] > arr[i]):
-            indexOfLargest = leftArrIndex
-        else:
-            indexOfLargest = i
-
-        if(indexOfLargest != i):
-            swap(i,indexOfLargest, arr)
+    if (leftArrIndex < arrSize and arr[leftArrIndex] > arr[i]):
+        indexOfLargest = leftArrIndex
     else:
-        if((i<arrSize) and arr[leftArrIndex] > arr[i]):
-            indexOfLargest = leftArrIndex
-        else:
-            indexOfLargest = i
-        if((i<arrSize) and arr[rightArrIndex] > arr[i] and arr[rightArrIndex] > arr[leftArrIndex]):
-            indexOfLargest = rightArrIndex
+        indexOfLargest = i
 
-        if(indexOfLargest != i):
-            swap(i,indexOfLargest, arr)
-            maxHeapify(arrSize, indexOfLargest, arr)
-        
-    
+    if(rightArrIndex < arrSize and arr[rightArrIndex]>arr[indexOfLargest]):
+        indexOfLargest = rightArrIndex
+
+    if(indexOfLargest != i):
+        swap(i, indexOfLargest, arr)
+        maxHeapify(arrSize, indexOfLargest, arr)
+      
 
 def buildHeap(arr):
     heapSize = int(len(arr))
@@ -52,16 +44,18 @@ def buildHeap(arr):
         maxHeapify(heapSize, i, arr)
         i = i - 1
 def heapSort(arr):
+    heapSize = len(arr)
     i = int(len(arr)-1)
+    
     while(i >= 0):
         swap(0, i, arr)
-        print(arr)
+        #print(arr)
         i = i - 1
         maxHeapify(i, 0, arr)
         
-        print(arr)
+        #print(arr)
         
-        print(i)
+        #print(i)
         
 #priority queue operations.(priority queues work most efficiently with heaps as the set of keys)
 def getMaximum(arr):
@@ -76,11 +70,15 @@ def extractMaximum(arr, heapSize):
     maxHeapify(heapSize, 0, arr)
         
 l = [2,45,63,23,26,6]
+print("original array: ", l, "\n")
 buildHeap(l)
-print(l, "\n")
-extractMaximum(l, len(l))
-print(l, "\n")
-#heapSort(l)
+
+print("heapified array: ", l, "\n")
+
+heapSort(l)
+print("heap-sorted array: ", l, "\n")
+
+
 
 
 
